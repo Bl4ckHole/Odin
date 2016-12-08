@@ -45,3 +45,17 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Actual gitignore
+Debug
+ipch/odin-922b77f7/odin-223136b6.ipch
+Odin.opensdf
+Odin.sln
+*.sdf
+Odin.v12.suo
+Odin.vcxproj.filters
+*.vcxproj
+stdafx.cpp
+targetver.h
+ReadMe.txt
+stdafx.h
