@@ -13,8 +13,16 @@ int f24();
 int f36();
 int f28();
 int f32();
+int fibo(int);
+int triangular(int);
+int sumpow(int);
+int syracuse(int,int);
+int penta(int);
+
 
 char n1[] = { 0x4c, 0x4e, 0x55, 0x52, 0x48, 0x5a, 0x0 };
+string super_string = "Alright... I know, debugging some obfuscated code is funny... Haha.";
+
 
 
 
@@ -25,6 +33,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		mov eax, fs:[30h]
 			mov peb, eax
 	}
+
 
 	/*if (peb[2]){
 	printf("Debug !\n");
@@ -107,18 +116,50 @@ void xor(char *s, int n){
 	}
 }
 
+int fibo(int n) {
+	if (n)
+		return n*fibo(n - 1);
+	return 1;
+}
+
+int triangular(int n) {
+	int res=0;
+	for (int i = res;i < n;res += i++);
+	return res;
+}
+
+int sumpow(int n) {
+	int res=0;
+	for(int i=res;i<n;res+=pow(++i,i));
+	return res;
+}
+
+int syracuse(int n, int etape){
+	if (n == 1) 
+		return etape;
+	if (n%2==1)
+		return syracuse(3*n+1,++etape);
+	return syracuse(n/2,++etape);
+}
+
+int penta(int n) {
+	return n*(3*n-1)/2;
+}
+
+
+
 int f36(){
-	return 36;
+	return syracuse(triangular(sumpow(3)-1),1);
 }
 
 int f24(){
-	return 24;
+	return syracuse(penta(triangular(fibo(4)-4)+2), 1) / 2;
 }
 
 int f32(){
-	return 32;
+	return syracuse(triangular(fibo(5)),1);
 }
 
 int f28(){
-	return 28;
+	return syracuse(triangular(penta(19) / 7),1);
 }
