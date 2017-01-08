@@ -8,22 +8,26 @@ using namespace std;
 
 typedef int(*type_printf)(const char*, ...);
 
-std::string base64_encode(unsigned char const*, unsigned int len);
-std::string base64_decode(std::string const& s);
+
 void *extractFunc(char*, PPEB_LDR_DATA);
 void xor(char *, int);
-int f24();
-int f36();
-int f28();
-int f32();
-int fibo(int);
+void rot13(char *);
+std::string base64_encode(unsigned char const*, unsigned int);
+std::string base64_decode(std::string const&);
+int facto(int);
 int triangular(int);
 int sumpow(int);
 int syracuse(int,int);
 int penta(int);
+int fibo(int);
 
+int f24();
+int f36();
+int f28();
+int f32();
 
 char n1[] = { 0x5f, 0x74, 0x76, 0x4c, 0x5e, 0x52, 0x6e, 0x51, 0x0 };
+char Hello[] = { 'F', 'T', 'I', 'f', 'o', 'T', '8', 'f', 'V', 'U', 'q', 'i', 'p', 'z', 'k', 'x', 'V', 'P', 'R', 'X', 0x0 };
 
 string super_string = "Alright... I know, debugging some obfuscated code is funny... Haha.";
 
@@ -35,7 +39,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	char *peb;
 	_asm{
 		mov eax, fs:[30h]
-			mov peb, eax
+		mov peb, eax
 	}
 
 
@@ -54,10 +58,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	}*/
 
 	PPEB_LDR_DATA pld = ((PPEB)peb)->Ldr;
-
 	type_printf f = (type_printf)extractFunc(n1,pld);
-	f(base64_decode("SGVsbG8sIHdvcmxkICEK").c_str());
-
+	rot13(Hello);
+	f(base64_decode(Hello).c_str());
 	return 0;
 }
 
@@ -114,9 +117,18 @@ void *extractFunc(char *name, PPEB_LDR_DATA pld){
 
 void xor(char *s, int n){
 	int i = 0;
-	while (s[i] != '\0'){
-		s[i] = s[i] ^ n;
-		i++;
+	while (s[i] != '\0')
+		s[i] = s[i++] ^ n;
+}
+
+void rot13(char * str)
+{
+	int var=9;
+	for (int i = 0; str[i] != '\0'; i++) {
+		if ((*(str + i) >= 'a' && *(str + i) < 'n') || *(str + i) >= 'A' && *(str + i) < 'N')
+			*(str + i) += syracuse(fibo(var),0);
+		else if ((*(str + i) >= 'n' && *(str + i) <= 'z') || (*(str + i) >= 'N' && *(str + i) <= 'Z'))
+			*(str + i) -= syracuse(triangular(var)-1,0);
 	}
 }
 
@@ -145,24 +157,22 @@ std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_
 			char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
 			char_array_4[3] = char_array_3[2] & 0x3f;
 
-			for (i = 0; (i <4); i++)
-				ret += base64_chars[char_array_4[i]];
+			for (i = 0; (i <4); ret += base64_chars[char_array_4[i++]]);
+		
 			i = 0;
 		}
 	}
 
 	if (i)
 	{
-		for (j = i; j < 3; j++)
-			char_array_3[j] = '\0';
+		for (j = i; j < 3; char_array_3[j++] = '\0');
 
 		char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
 		char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
 		char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
 		char_array_4[3] = char_array_3[2] & 0x3f;
 
-		for (j = 0; (j < i + 1); j++)
-			ret += base64_chars[char_array_4[j]];
+		for (j = 0; (j < i + 1); ret += base64_chars[char_array_4[j++]]);
 
 		while ((i++ < 3))
 			ret += '=';
@@ -193,18 +203,17 @@ std::string base64_decode(std::string const& encoded_string) {
 			char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
 			char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
-			for (i = 0; (i < 3); i++)
-				ret += char_array_3[i];
+			for (i = 0; (i < 3); ret += char_array_3[i++]);
+				
 			i = 0;
 		}
 	}
 
 	if (i) {
-		for (j = i; j <4; j++)
-			char_array_4[j] = 0;
+		for (j = i; j <4; char_array_4[j++] = 0)
 
-		for (j = 0; j <4; j++)
-			char_array_4[j] = base64_chars.find(char_array_4[j]);
+		for (j = 0; j <4; char_array_4[j] = base64_chars.find(char_array_4[j++]))
+			
 
 		char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
 		char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
@@ -219,9 +228,9 @@ std::string base64_decode(std::string const& encoded_string) {
 
 
 
-int fibo(int n) {
+int facto(int n) {
 	if (n)
-		return n*fibo(n-1);
+		return n*facto(n-1);
 	return 1;
 }
 
@@ -249,6 +258,11 @@ int penta(int n) {
 	return n*(3*n-1)/2;
 }
 
+int fibo(int n) {
+	if (n==2 || n==1)
+		return 1;
+	return fibo(n-1)+fibo(n-2);
+}
 
 
 int f36(){
@@ -256,11 +270,11 @@ int f36(){
 }
 
 int f24(){
-	return syracuse(penta(triangular(fibo(4)-4)+2), 1) / 2;
+	return syracuse(penta(triangular(facto(4)-4)+2), 1) / 2;
 }
 
 int f32(){
-	return syracuse(triangular(fibo(5)),1);
+	return syracuse(triangular(facto(5)),1);
 }
 
 int f28(){
