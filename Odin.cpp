@@ -2,11 +2,14 @@
 #include <Windows.h>
 #include <winternl.h>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
 typedef int(*type_printf)(const char*, ...);
 
+std::string base64_encode(unsigned char const*, unsigned int len);
+std::string base64_decode(std::string const& s);
 void *extractFunc(char*, PPEB_LDR_DATA);
 void xor(char *, int);
 int f24();
@@ -20,7 +23,8 @@ int syracuse(int,int);
 int penta(int);
 
 
-char n1[] = { 0x4c, 0x4e, 0x55, 0x52, 0x48, 0x5a, 0x0 };
+char n1[] = { 0x5f, 0x74, 0x76, 0x4c, 0x5e, 0x52, 0x6e, 0x51, 0x0 };
+
 string super_string = "Alright... I know, debugging some obfuscated code is funny... Haha.";
 
 
@@ -52,7 +56,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	PPEB_LDR_DATA pld = ((PPEB)peb)->Ldr;
 
 	type_printf f = (type_printf)extractFunc(n1,pld);
-	f("Hello, world !\n");
+	f(base64_decode("SGVsbG8sIHdvcmxkICEK").c_str());
 
 	return 0;
 }
@@ -84,19 +88,19 @@ void *extractFunc(char *name, PPEB_LDR_DATA pld){
 		unsigned int * tablePointer = (unsigned int*)(dll + tableFonction);
 
 		unsigned int nameRVA = ((unsigned int *)(debut_te + v32))[0];
-		xor(name, v32);
+		xor(name, v36);
 		unsigned int * tableName = (unsigned int *)(dll + nameRVA);
 
 		unsigned int ordinalRVA = ((unsigned int *)(debut_te + v36))[0];
-		xor(name, v36);
+		xor(name, v32);
 		short int *tableOrdinal = (short int *)(dll + ordinalRVA); // /!\ Important fact that it's a short int and NOT an unsigned int
 		unsigned int nbNames = ((unsigned int *)(debut_te + v24))[0];
-		xor(name, v24);
+		xor(name, v24); 
 		unsigned int rva_printf = 0;
 
-
+		
 		for (int i = 0; i < nbNames; i++){
-			if (strcmp(dll + tableName[i], name) == 0){
+			if (strcmp(dll + tableName[i], base64_decode((std::string) name).c_str()) == 0){
 				//printf("function %d : %s\n", tableOrdinal[i], dll + tableName[i]);
 				rva_printf = tablePointer[tableOrdinal[i]];
 				return dll+rva_printf;
@@ -116,9 +120,108 @@ void xor(char *s, int n){
 	}
 }
 
+
+
+static inline bool is_base64(unsigned char c) {
+	return (isalnum(c) || (c == '+') || (c == '/'));
+}
+
+std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
+	std::string ret;
+	static const std::string base64_chars =
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		"abcdefghijklmnopqrstuvwxyz"
+		"0123456789+/";
+	int i = 0;
+	int j = 0;
+	unsigned char char_array_3[3];
+	unsigned char char_array_4[4];
+
+	while (in_len--) {
+		char_array_3[i++] = *(bytes_to_encode++);
+		if (i == 3) {
+			char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
+			char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+			char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+			char_array_4[3] = char_array_3[2] & 0x3f;
+
+			for (i = 0; (i <4); i++)
+				ret += base64_chars[char_array_4[i]];
+			i = 0;
+		}
+	}
+
+	if (i)
+	{
+		for (j = i; j < 3; j++)
+			char_array_3[j] = '\0';
+
+		char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
+		char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
+		char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
+		char_array_4[3] = char_array_3[2] & 0x3f;
+
+		for (j = 0; (j < i + 1); j++)
+			ret += base64_chars[char_array_4[j]];
+
+		while ((i++ < 3))
+			ret += '=';
+	}
+	return ret;
+
+}
+
+std::string base64_decode(std::string const& encoded_string) {
+	static const std::string base64_chars =
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		"abcdefghijklmnopqrstuvwxyz"
+		"0123456789+/";
+	int in_len = encoded_string.size();
+	int i = 0;
+	int j = 0;
+	int in_ = 0;
+	unsigned char char_array_4[4], char_array_3[3];
+	std::string ret;
+
+	while (in_len-- && (encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
+		char_array_4[i++] = encoded_string[in_]; in_++;
+		if (i == 4) {
+			for (i = 0; i <4; i++)
+				char_array_4[i] = base64_chars.find(char_array_4[i]);
+
+			char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+			char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
+			char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+
+			for (i = 0; (i < 3); i++)
+				ret += char_array_3[i];
+			i = 0;
+		}
+	}
+
+	if (i) {
+		for (j = i; j <4; j++)
+			char_array_4[j] = 0;
+
+		for (j = 0; j <4; j++)
+			char_array_4[j] = base64_chars.find(char_array_4[j]);
+
+		char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+		char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
+		char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+
+		for (j = 0; (j < i - 1); j++) ret += char_array_3[j];
+	}
+
+	return ret;
+}
+
+
+
+
 int fibo(int n) {
 	if (n)
-		return n*fibo(n - 1);
+		return n*fibo(n-1);
 	return 1;
 }
 
@@ -137,7 +240,7 @@ int sumpow(int n) {
 int syracuse(int n, int etape){
 	if (n == 1) 
 		return etape;
-	if (n%2==1)
+	if (n%2)
 		return syracuse(3*n+1,++etape);
 	return syracuse(n/2,++etape);
 }
