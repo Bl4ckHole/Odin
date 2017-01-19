@@ -135,6 +135,7 @@ int f28();
 int f32();
 
 bool checkHash(string hash);
+string getHash();
 
 char n1[] = { 0x5f, 0x74, 0x76, 0x4c, 0x5e, 0x52, 0x6e, 0x51, 0x0 };
 char Hello[] = { 'F', 'T', 'I', 'f', 'o', 'T', '8', 'f', 'V', 'U', 'q', 'i', 'p', 'z', 'k', 'x', 'V', 'P', 'R', 'X', 0x0 };
@@ -165,6 +166,7 @@ unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
 				sizeof(szProcessName) / sizeof(TCHAR));
 			if (!_tcsicmp(processName, szProcessName)) {
 				CloseHandle(hProcess);
+				printf("%p\n", hMod);
 				return (unsigned char *) hMod;
 			}
 		}
@@ -174,7 +176,7 @@ unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
 	return NULL;
 }
 
-#define NHASH 750
+#define NHASH 948
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -184,21 +186,62 @@ int _tmain(int argc, _TCHAR* argv[])
 		mov peb, eax
 	}
 
-
-	if (peb[2]){
-		return 1;
-	}
+	string endHash;
 
 
 	//printf("SHA512 of exe : %s \n", sha512("Odin.exe").c_str());
 
+	if (peb[2]) {
+		return 1;
+	}
+
+	endHash = getHash();
+	if (!checkHash(endHash)){
+		return 1;
+	}
+
+	PPEB_LDR_DATA pld = ((PPEB)peb)->Ldr;
+	if (peb[2]) {
+		return 1;
+	}
+	endHash = getHash();
+	if (!checkHash(endHash)) {
+		return 1;
+	}
+
+	type_printf f = (type_printf)extractFunc(n1,pld);
+	endHash = getHash();
+	if (!checkHash(endHash)) {
+		return 1;
+	}
+	rot13(Hello);
+	if (peb[2]) {
+		return 1;
+	}
+
+	endHash = getHash();
+	if (!checkHash(endHash)) {
+		return 1;
+	}
+	f(base64_decode(Hello).c_str());
+	return 0;
+}
+
+bool checkHash(string hash){
+	string originalHash = "797df887649644b732cf5124996ecdef3585f21c675d2e8673f92c86a2d9f7793b3b46d0a386585d71c495213583be07301a8f192d143381edb7b9d1c70f12ea";
+	printf("%s\n%s\n", originalHash.c_str(), hash.c_str());
+	return !strcmp(hash.c_str(),originalHash.c_str());
+}
+
+
+string getHash() {
 	DWORD aProcesses[1024];
 	DWORD cbNeeded;
 	DWORD cProcesses;
 
 	// Get the list of process identifiers.
-	if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)){
-		return 1;
+	if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)) {
+		return "";
 	}
 
 	// Calculate how many process identifiers were returned.
@@ -208,40 +251,21 @@ int _tmain(int argc, _TCHAR* argv[])
 	// Check the names of all the processess (Case insensitive)
 	for (int i = 0; i < cProcesses; i++) {
 		processPointer = GetBaseAddressByName(aProcesses[i], TEXT("Odin.exe"));
-		if (processPointer != NULL){
+		if (processPointer != NULL) {
 			break;
 		}
 	}
-
-	processPointer += 0x00018152;
-	unsigned char codeBlock[NHASH+1];
-	for (int i = 0; i < NHASH; i++){
+	processPointer += 0x0001BE70;
+	unsigned char codeBlock[NHASH + 1];
+	for (int i = 0; i < NHASH; i++) {
 		codeBlock[i] = processPointer[i];
+		// ATTENTION : il y a la dedans une dépendance à la place ou elle est stockée en mémoire  
+		//Ici ca va bien fonctionner si le hmod en memoire est a l'adresse : 00380000
 	}
+	printf("\n");
 	codeBlock[NHASH] = '\0';
+	return sha512c(codeBlock);
 
-	string endHash = sha512c(codeBlock);
-	if (!checkHash(endHash)){
-		return 42;
-	}
-
-	PPEB_LDR_DATA pld = ((PPEB)peb)->Ldr;
-	if (peb[2]) {
-		return 1;
-	}
-
-	type_printf f = (type_printf)extractFunc(n1,pld);
-	rot13(Hello);
-	if (peb[2]) {
-		return 1;
-	}
-	f(base64_decode(Hello).c_str());
-	return 0;
-}
-
-bool checkHash(string hash){
-	string originalHash = "4ddff2d63ed3c36e46692566f661bf0516f8264549c749670f684ad42280f07c0e9f2b9f1a18e6f1dc05f38d648e775cf4647eb398688a53a6bc5eccb72b34b4";
-	return !strcmp(hash.c_str(),originalHash.c_str());
 }
 
 void *extractFunc(char *name, PPEB_LDR_DATA pld){
