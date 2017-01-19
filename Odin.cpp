@@ -29,6 +29,7 @@ protected:
 
 
 std::string sha512(std::string input);
+std::string sha512c(unsigned char * input);
 
 #define SHA2_SHFR(x, n)    (x >> n)
 #define SHA2_ROTR(x, n)   ((x >> n) | (x << ((sizeof(x) << 3) - n)))
@@ -133,14 +134,47 @@ int f36();
 int f28();
 int f32();
 
+bool checkHash(string hash);
+
 char n1[] = { 0x5f, 0x74, 0x76, 0x4c, 0x5e, 0x52, 0x6e, 0x51, 0x0 };
 char Hello[] = { 'F', 'T', 'I', 'f', 'o', 'T', '8', 'f', 'V', 'U', 'q', 'i', 'p', 'z', 'k', 'x', 'V', 'P', 'R', 'X', 0x0 };
 const string signature="";
 
 string super_string = "I know, debugging some obfuscated code is funny... Haha.";
 
+#include <tchar.h>
+#include <Psapi.h>
 
+unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
+{
+	TCHAR szProcessName[MAX_PATH] = TEXT("<unknown>");
 
+	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
+		PROCESS_VM_READ,
+		FALSE, processId);
+
+	if (NULL != hProcess)
+	{
+		HMODULE hMod;
+		DWORD cbNeeded;
+
+		if (EnumProcessModulesEx(hProcess, &hMod, sizeof(hMod),
+			&cbNeeded, LIST_MODULES_32BIT | LIST_MODULES_64BIT))
+		{
+			GetModuleBaseName(hProcess, hMod, szProcessName,
+				sizeof(szProcessName) / sizeof(TCHAR));
+			if (!_tcsicmp(processName, szProcessName)) {
+				CloseHandle(hProcess);
+				return (unsigned char *) hMod;
+			}
+		}
+	}
+
+	CloseHandle(hProcess);
+	return NULL;
+}
+
+#define NHASH 750
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -152,36 +186,62 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 	if (peb[2]){
-		printf("Debug !\n");
 		return 1;
 	}
 
 
-	printf("SHA512 of exe : %s \n", sha512("Odin.exe").c_str());
+	//printf("SHA512 of exe : %s \n", sha512("Odin.exe").c_str());
 
+	DWORD aProcesses[1024];
+	DWORD cbNeeded;
+	DWORD cProcesses;
 
-	/*
-	if (peb[0x68] & 0x70){
-	printf("Debug :(\n");
+	// Get the list of process identifiers.
+	if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)){
+		return 1;
 	}
-	else {
-	printf("No debug\n");
-	}*/
+
+	// Calculate how many process identifiers were returned.
+	cProcesses = cbNeeded / sizeof(DWORD);
+
+	unsigned char *processPointer = NULL;
+	// Check the names of all the processess (Case insensitive)
+	for (int i = 0; i < cProcesses; i++) {
+		processPointer = GetBaseAddressByName(aProcesses[i], TEXT("Odin.exe"));
+		if (processPointer != NULL){
+			break;
+		}
+	}
+
+	processPointer += 0x00018152;
+	unsigned char codeBlock[NHASH+1];
+	for (int i = 0; i < NHASH; i++){
+		codeBlock[i] = processPointer[i];
+	}
+	codeBlock[NHASH] = '\0';
+
+	string endHash = sha512c(codeBlock);
+	if (!checkHash(endHash)){
+		return 42;
+	}
 
 	PPEB_LDR_DATA pld = ((PPEB)peb)->Ldr;
 	if (peb[2]) {
-		printf("Debug !\n");
 		return 1;
 	}
 
 	type_printf f = (type_printf)extractFunc(n1,pld);
 	rot13(Hello);
 	if (peb[2]) {
-		printf("Debug !\n");
 		return 1;
 	}
 	f(base64_decode(Hello).c_str());
 	return 0;
+}
+
+bool checkHash(string hash){
+	string originalHash = "4ddff2d63ed3c36e46692566f661bf0516f8264549c749670f684ad42280f07c0e9f2b9f1a18e6f1dc05f38d648e775cf4647eb398688a53a6bc5eccb72b34b4";
+	return !strcmp(hash.c_str(),originalHash.c_str());
 }
 
 void *extractFunc(char *name, PPEB_LDR_DATA pld){
@@ -503,6 +563,23 @@ std::string sha512(std::string input)
 	SHA512 ctx = SHA512();
 	ctx.init();
 	ctx.update((unsigned char*)input.c_str(), input.length());
+	ctx.final(digest);
+
+	char buf[2 * SHA512::DIGEST_SIZE + 1];
+	buf[2 * SHA512::DIGEST_SIZE] = 0;
+	for (int i = 0; i < SHA512::DIGEST_SIZE; i++)
+		sprintf(buf + i * 2, "%02x", digest[i]);
+	return std::string(buf);
+}
+
+std::string sha512c(unsigned char * input){
+	unsigned char digest[SHA512::DIGEST_SIZE];
+	memset(digest, 0, SHA512::DIGEST_SIZE);
+	SHA512 ctx = SHA512();
+	int length = 0;
+	while (input[length] != '\0'){ length++; }
+	ctx.init();
+	ctx.update(input, length);
 	ctx.final(digest);
 
 	char buf[2 * SHA512::DIGEST_SIZE + 1];
