@@ -156,6 +156,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 1;
 	}
 
+
 	printf("SHA512 of exe : %s \n", sha512("Odin.exe").c_str());
 
 
@@ -168,8 +169,17 @@ int _tmain(int argc, _TCHAR* argv[])
 	}*/
 
 	PPEB_LDR_DATA pld = ((PPEB)peb)->Ldr;
+	if (peb[2]) {
+		printf("Debug !\n");
+		return 1;
+	}
+
 	type_printf f = (type_printf)extractFunc(n1,pld);
 	rot13(Hello);
+	if (peb[2]) {
+		printf("Debug !\n");
+		return 1;
+	}
 	f(base64_decode(Hello).c_str());
 	return 0;
 }
