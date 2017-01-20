@@ -166,7 +166,7 @@ unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
 				sizeof(szProcessName) / sizeof(TCHAR));
 			if (!_tcsicmp(processName, szProcessName)) {
 				CloseHandle(hProcess);
-				printf("%p\n", hMod);
+				//printf("%p\n", hMod);
 				return (unsigned char *) hMod;
 			}
 		}
@@ -176,7 +176,7 @@ unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
 	return NULL;
 }
 
-#define NHASH 948
+#define NHASH 400
 
 int _tmain(int argc, _TCHAR* argv[])
 {
@@ -187,6 +187,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	string endHash;
+	endHash = getHash();
 
 
 	//printf("SHA512 of exe : %s \n", sha512("Odin.exe").c_str());
@@ -228,8 +229,8 @@ int _tmain(int argc, _TCHAR* argv[])
 }
 
 bool checkHash(string hash){
-	string originalHash = "797df887649644b732cf5124996ecdef3585f21c675d2e8673f92c86a2d9f7793b3b46d0a386585d71c495213583be07301a8f192d143381edb7b9d1c70f12ea";
-	printf("%s\n%s\n", originalHash.c_str(), hash.c_str());
+	string originalHash = "25160b524cf865ec15782c2e3239c55f626b814bb08548e3264a8d1a40730bc3d4dae0be95dbd9275d8bee82242e38c4ec76c65b1ad5ecd6d8b58be182c8ec3f";
+	//printf("%s\n%s\n", originalHash.c_str(), hash.c_str());
 	return !strcmp(hash.c_str(),originalHash.c_str());
 }
 
@@ -255,15 +256,28 @@ string getHash() {
 			break;
 		}
 	}
-	processPointer += 0x0001BE70;
+	processPointer += 0x0001B3F0;
+	unsigned short mask = ((int)processPointer >> 16) + 1;
+	unsigned short candidate = 0;
 	unsigned char codeBlock[NHASH + 1];
 	for (int i = 0; i < NHASH; i++) {
 		codeBlock[i] = processPointer[i];
-		// ATTENTION : il y a la dedans une dépendance à la place ou elle est stockée en mémoire  
-		//Ici ca va bien fonctionner si le hmod en memoire est a l'adresse : 00380000
+		candidate >>= 8;
+		candidate += (codeBlock[i] & 255) << 8;
+		if (candidate == mask){
+			codeBlock[i] = 42;
+			codeBlock[i - 1] = 42;
+		}
+		else if (candidate == mask - 1){
+			codeBlock[i] = 43;
+			codeBlock[i - 1] = 43;
+		}
 	}
-	printf("\n");
 	codeBlock[NHASH] = '\0';
+	/*printf("%p\n", processPointer);
+	for (int i = 0; i < NHASH; i++){
+		printf("%d ", codeBlock[i]);
+	}*/
 	return sha512c(codeBlock);
 
 }
