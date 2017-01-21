@@ -3,33 +3,33 @@
 #include <winternl.h>
 #include <string>
 #include <iostream>
-class SHA512
+class TRFYSGUHdfd45g4h5
 {
 protected:
 	typedef unsigned char uint8;
 	typedef unsigned int uint32;
 	typedef unsigned long long uint64;
 
-	const static uint64 sha512_k[];
-	static const unsigned int SHA384_512_BLOCK_SIZE = (1024 / 8);
+	const static uint64 a5665afnvn[];
+	static const unsigned int TRUC_SIZE = (1024 / 8);
 
 public:
-	void init();
-	void update(const unsigned char *message, unsigned int len);
-	void final(unsigned char *digest);
-	static const unsigned int DIGEST_SIZE = (512 / 8);
+	void final53434zre();
+	void funcg5er646e(const unsigned char *message, unsigned int len);
+	void Finit4625(unsigned char *digest);
+	static const unsigned int Gros_Chiffre = (512 / 8);
 
 protected:
-	void transform(const unsigned char *message, unsigned int block_nb);
-	unsigned int m_tot_len;
-	unsigned int m_len;
-	unsigned char m_block[2 * SHA384_512_BLOCK_SIZE];
+	void F_Static(const unsigned char *message, unsigned int block_nb);
+	unsigned int m_rand_int;
+	unsigned int m_dfghj;
+	unsigned char m_ABCDEF54[2 * TRUC_SIZE];
 	uint64 m_h[8];
 };
 
 
-std::string sha512(std::string input);
-std::string sha512c(unsigned char * input);
+std::string func4239poiuy(std::string input);
+std::string func4239poiuyc(unsigned char * input);
 
 #define SHA2_SHFR(x, n)    (x >> n)
 #define SHA2_ROTR(x, n)   ((x >> n) | (x << ((sizeof(x) << 3) - n)))
@@ -69,7 +69,7 @@ std::string sha512c(unsigned char * input);
            | ((uint64) *((str) + 1) << 48)    \
            | ((uint64) *((str) + 0) << 56);   \
 }
-const unsigned long long SHA512::sha512_k[80] = //ULL = uint64
+const unsigned long long TRFYSGUHdfd45g4h5::a5665afnvn[80] = //ULL = uint64
 { 0x428a2f98d728ae22ULL, 0x7137449123ef65cdULL,
 0xb5c0fbcfec4d3b2fULL, 0xe9b5dba58189dbbcULL,
 0x3956c25bf348b538ULL, 0x59f111f1b605d019ULL,
@@ -114,59 +114,59 @@ const unsigned long long SHA512::sha512_k[80] = //ULL = uint64
 
 using namespace std;
 
-typedef int(*type_printf)(const char*, ...);
+typedef int(*func0sdf)(const char*, ...);
 
 
-void *extractFunc(char*, PPEB_LDR_DATA);
-void xor(char *, int);
-void rot13(char *);
-std::string base64_encode(unsigned char const*, unsigned int);
-std::string base64_decode(std::string const&);
-int facto(int);
-int triangular(int);
-int sumpow(int);
-int syracuse(int, int);
-int penta(int);
-int fibo(int);
+void *eHGfZjOPbTk547(char*, PPEB_LDR_DATA);
+void C_Trololo_Les_Rand_NaMeS(char *, int);
+void BonneGrosseFonctionDesFamilles(char *);
+std::string fujnc454d35r4fsd34d(unsigned char const*, unsigned int);
+std::string JeMangeDesMNMs(std::string const&);
+int PastropComplique(int);
+int UnPeuComplique(int);
+int SehrCompliziert(int);
+int RightWayDude(int, int);
+int SEDRFGTyhjnkdssf(int);
+int JgEkBdUIG5dfdrt5s(int);
 
-int f24();
-int f36();
-int f28();
-int f32();
+int BarbieGirl();
+int BarbieWorld();
+int LifeInPlastic();
+int ITSFANTASTICTROLOLOLO();
 
-bool checkHash(string hash);
-string getHash();
+bool PING(string hash);
+string PONG();
 
-char n1[] = { 0x5f, 0x74, 0x76, 0x4c, 0x5e, 0x52, 0x6e, 0x51, 0x0 };
-char Hello[] = { 'F', 'T', 'I', 'f', 'o', 'T', '8', 'f', 'V', 'U', 'q', 'i', 'p', 'z', 'k', 'x', 'V', 'P', 'R', 'X', 0x0 };
+char n154fg56gf645[] = { 0x5f, 0x74, 0x76, 0x4c, 0x5e, 0x52, 0x6e, 0x51, 0x0 };
+char PascalVaxiviere[] = { 'F', 'T', 'I', 'f', 'o', 'T', '8', 'f', 'V', 'U', 'q', 'i', 'p', 'z', 'k', 'x', 'V', 'P', 'R', 'X', 0x0 };
 const string signature = "";
 
-string super_string = "I know, debugging some obfuscated code is funny... Haha.";
+string HelloWorldString = "I know, debugging some obfuscated code is funny... Haha.";
 
 #include <tchar.h>
 #include <psapi.h>
 
-unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
+unsigned char* fun788ty66tyuuyt45(DWORD ZSEDRFTGYHUJIKDsjhgftygijh, TCHAR *TRDSfyuihfgrodijgrythriuthyzetyrgifu)
 {
-	TCHAR szProcessName[MAX_PATH] = TEXT("<unknown>");
+	TCHAR sdffdfghuiuyftdrsdrftgy[MAX_PATH] = TEXT("<unknown>");
 
-	HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION |
+	HANDLE xdfchgyvuhkilgyftdsgg = OpenProcess(PROCESS_QUERY_INFORMATION |
 		PROCESS_VM_READ,
-		FALSE, processId);
+		FALSE, ZSEDRFTGYHUJIKDsjhgftygijh);
 
-	if (NULL != hProcess)
+	if (NULL != xdfchgyvuhkilgyftdsgg)
 	{
-		HMODULE hMod;
-		DWORD cbNeeded;
+		HMODULE gvyhbjdsf15dfrt65derz45q8es8dr;
+		DWORD sfdhjsdfhi459165;
 
-		if (EnumProcessModules(hProcess, &hMod, sizeof(hMod),
-			&cbNeeded))
+		if (EnumProcessModules(xdfchgyvuhkilgyftdsgg, &gvyhbjdsf15dfrt65derz45q8es8dr, sizeof(gvyhbjdsf15dfrt65derz45q8es8dr),
+			&sfdhjsdfhi459165))
 		{
-			GetModuleBaseName(hProcess, hMod, szProcessName,
-				sizeof(szProcessName) / sizeof(TCHAR));
-			if (!_tcsicmp(processName, szProcessName)) {
+			GetModuleBaseName(xdfchgyvuhkilgyftdsgg, gvyhbjdsf15dfrt65derz45q8es8dr, sdffdfghuiuyftdrsdrftgy,
+				sizeof(sdffdfghuiuyftdrsdrftgy) / sizeof(TCHAR));
+			if (!_tcsicmp(TRDSfyuihfgrodijgrythriuthyzetyrgifu, sdffdfghuiuyftdrsdrftgy)) {
 				//printf("%p\n", hMod);
-				return (unsigned char *)hMod;
+				return (unsigned char *)gvyhbjdsf15dfrt65derz45q8es8dr;
 			}
 		}
 	}
@@ -177,348 +177,348 @@ unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	char *peb;
+	char *RickAstleyLOL;
 	_asm {
 		mov eax, fs:[30h]
-			mov peb, eax
+			mov RickAstleyLOL, eax
 	}
 
-	string endHash;
-	endHash = getHash();
+	string VariableAleatoire01234567899876543210;
+	VariableAleatoire01234567899876543210 = PONG();
 
 
 
 	//printf("SHA512 of exe : %s \n", sha512("Odin.exe").c_str());
 
-	if (peb[2]) {
+	if (RickAstleyLOL[2]) {
 		return 1;
 	}
 
-	endHash = getHash();
-	if (!checkHash(endHash)) {
+	VariableAleatoire01234567899876543210 = PONG();
+	if (!PING(VariableAleatoire01234567899876543210)) {
 		return 1;
 	}
 
-	PPEB_LDR_DATA pld = ((PPEB)peb)->Ldr;
-	if (peb[2]) {
+	PPEB_LDR_DATA pld = ((PPEB)RickAstleyLOL)->Ldr;
+	if (RickAstleyLOL[2]) {
 		return 1;
 	}
-	endHash = getHash();
-	if (!checkHash(endHash)) {
-		return 1;
-	}
-
-	type_printf f = (type_printf)extractFunc(n1, pld);
-	endHash = getHash();
-	if (!checkHash(endHash)) {
-		return 1;
-	}
-	rot13(Hello);
-	if (peb[2]) {
+	VariableAleatoire01234567899876543210 = PONG();
+	if (!PING(VariableAleatoire01234567899876543210)) {
 		return 1;
 	}
 
-	endHash = getHash();
-	if (!checkHash(endHash)) {
+	func0sdf f = (func0sdf)eHGfZjOPbTk547(n154fg56gf645, pld);
+	VariableAleatoire01234567899876543210 = PONG();
+	if (!PING(VariableAleatoire01234567899876543210)) {
 		return 1;
 	}
-	f(base64_decode(Hello).c_str());
+	BonneGrosseFonctionDesFamilles(PascalVaxiviere);
+	if (RickAstleyLOL[2]) {
+		return 1;
+	}
+
+	VariableAleatoire01234567899876543210 = PONG();
+	if (!PING(VariableAleatoire01234567899876543210)) {
+		return 1;
+	}
+	f(JeMangeDesMNMs(PascalVaxiviere).c_str());
 	return 0;
 }
 
-bool checkHash(string hash) {
-	string originalHash = "9c31b971a9d5970caa612fa2a7e793ea879323538247159f23da9318e9d14805856dc2a399d739080c53367515d337eda25cf0d90b376ace5ffdfde0d2afbd71";
+bool PING(string balle) {
+	string TheOneRing = "9c31b971a9d5970caa612fa2a7e793ea879323538247159f23da9318e9d14805856dc2a399d739080c53367515d337eda25cf0d90b376ace5ffdfde0d2afbd71";
 	//printf("%s\n%s\n", originalHash.c_str(), hash.c_str());
-	return !strcmp(hash.c_str(), originalHash.c_str());
+	return !strcmp(balle.c_str(), TheOneRing.c_str());
 }
 
 
-string getHash() {
-	DWORD aProcesses[1024];
-	DWORD cbNeeded;
-	DWORD cProcesses;
+string PONG() {
+	DWORD NyaNyaNyaNya[1024];
+	DWORD MaisPutain;
+	DWORD SilverShroud;
 
 	// Get the list of process identifiers.
-	if (!EnumProcesses(aProcesses, sizeof(aProcesses), &cbNeeded)) {
+	if (!EnumProcesses(NyaNyaNyaNya, sizeof(NyaNyaNyaNya), &MaisPutain)) {
 		return "";
 	}
 
 	// Calculate how many process identifiers were returned.
-	cProcesses = cbNeeded / sizeof(DWORD);
+	SilverShroud = MaisPutain / sizeof(DWORD);
 
-	unsigned char *processPointer = NULL;
+	unsigned char *UnJourMonPrinceViendra = NULL;
 	// Check the names of all the processess (Case insensitive)
-	for (int i = 0; i < cProcesses; i++) {
-		processPointer = GetBaseAddressByName(aProcesses[i], TEXT("Odin.exe"));
-		if (processPointer != NULL) {
+	for (int i = 0; i < SilverShroud; i++) {
+		UnJourMonPrinceViendra = fun788ty66tyuuyt45(NyaNyaNyaNya[i], TEXT("Odin.exe"));
+		if (UnJourMonPrinceViendra != NULL) {
 			break;
 		}
 	}
-	processPointer += 0x0001B3F0;
-	unsigned short mask = ((int)processPointer >> 16) + 1;
-	unsigned short candidate = 0;
-	unsigned char codeBlock[NHASH + 1];
+	UnJourMonPrinceViendra += 0x0001B3F0;
+	unsigned short GrosJean = ((int)UnJourMonPrinceViendra >> 16) + 1;
+	unsigned short PetitJean = 0;
+	unsigned char LaBonfanterie[NHASH + 1];
 	for (int i = 0; i < NHASH; i++) {
-		codeBlock[i] = processPointer[i];
-		candidate >>= 8;
-		candidate += (codeBlock[i] & 255) << 8;
-		if (candidate == mask) {
-			codeBlock[i] = 42;
-			codeBlock[i - 1] = 42;
+		LaBonfanterie[i] = UnJourMonPrinceViendra[i];
+		PetitJean >>= 8;
+		PetitJean += (LaBonfanterie[i] & 255) << 8;
+		if (PetitJean == GrosJean) {
+			LaBonfanterie[i] = 42;
+			LaBonfanterie[i - 1] = 42;
 		}
-		else if (candidate == mask - 1) {
-			codeBlock[i] = 43;
-			codeBlock[i - 1] = 43;
+		else if (PetitJean == GrosJean - 1) {
+			LaBonfanterie[i] = 43;
+			LaBonfanterie[i - 1] = 43;
 		}
 	}
-	codeBlock[NHASH] = '\0';
+	LaBonfanterie[NHASH] = '\0';
 	/*printf("%p\n", processPointer);
 	for (int i = 0; i < NHASH; i++){
 	printf("%d ", codeBlock[i]);
 	}*/
-	return sha512c(codeBlock);
+	return func4239poiuyc(LaBonfanterie);
 
 }
 
-void *extractFunc(char *name, PPEB_LDR_DATA pld) {
-	PLIST_ENTRY module0 = &(pld->InMemoryOrderModuleList);
-	PLIST_ENTRY module = module0->Flink;
-	module = module->Flink;
+void *eHGfZjOPbTk547(char *QuelQueChOsE, PPEB_LDR_DATA hjgsqdsdf45sdf5sef58) {
+	PLIST_ENTRY ERDTfygusdhijfokijytzfedghjeijthdfyuhij = &(hjgsqdsdf45sdf5sef58->InMemoryOrderModuleList);
+	PLIST_ENTRY Coucou = ERDTfygusdhijfokijytzfedghjeijthdfyuhij->Flink;
+	Coucou = Coucou->Flink;
 
 
-	int v36 = f36();
-	xor (name, v36);
-	int v28 = f28();
-	int v24 = f24();
-	xor (name, v24);
-	int v32 = f32();
+	int ErreurStrategique = BarbieWorld();
+	C_Trololo_Les_Rand_NaMeS(QuelQueChOsE, ErreurStrategique);
+	int DelaDrogue = LifeInPlastic();
+	int Barbiflette = BarbieGirl();
+	C_Trololo_Les_Rand_NaMeS(QuelQueChOsE, Barbiflette);
+	int ChequeDeLaSacem = ITSFANTASTICTROLOLOLO();
 
-	while (module != module0) {
-		char *pointer = (char*)module - 2 * sizeof(PVOID);
-		PLDR_DATA_TABLE_ENTRY pdte = (PLDR_DATA_TABLE_ENTRY)pointer;
+	while (Coucou != ERDTfygusdhijfokijytzfedghjeijthdfyuhij) {
+		char *azertyuiop01234 = (char*)Coucou - 2 * sizeof(PVOID);
+		PLDR_DATA_TABLE_ENTRY Doigt = (PLDR_DATA_TABLE_ENTRY)azertyuiop01234;
 		//printf("%S\n", pdte->FullDllName.Buffer);
-		char *dll = (char*)pdte->DllBase;
+		char *plop = (char*)Doigt->DllBase;
 
-		unsigned int pe = ((unsigned int*)(dll + v24 + v36))[0];
-		unsigned int te = ((unsigned int*)(dll + pe + 2 * (v28 + v32)))[0];
-		char * debut_te = dll + te;
-		unsigned int tableFonction = ((unsigned int*)(debut_te + v28))[0];
-		xor (name, v28);
-		unsigned int * tablePointer = (unsigned int*)(dll + tableFonction);
+		unsigned int kjhgfdsrdtfyguhij = ((unsigned int*)(plop + Barbiflette + ErreurStrategique))[0];
+		unsigned int Zyghsdfnjoghhyrfjikfg = ((unsigned int*)(plop + kjhgfdsrdtfyguhij + 2 * (DelaDrogue + ChequeDeLaSacem)))[0];
+		char * Baaaaaaaark = plop + Zyghsdfnjoghhyrfjikfg;
+		unsigned int taMere = ((unsigned int*)(Baaaaaaaark + DelaDrogue))[0];
+		C_Trololo_Les_Rand_NaMeS(QuelQueChOsE, DelaDrogue);
+		unsigned int * OhJaiLaFlemme = (unsigned int*)(plop + taMere);
 
-		unsigned int nameRVA = ((unsigned int *)(debut_te + v32))[0];
-		xor (name, v36);
-		unsigned int * tableName = (unsigned int *)(dll + nameRVA);
+		unsigned int ChercheBien7 = ((unsigned int *)(Baaaaaaaark + ChequeDeLaSacem))[0];
+		C_Trololo_Les_Rand_NaMeS(QuelQueChOsE, ErreurStrategique);
+		unsigned int * fghjkuytrswxcvbntresxcvbnytrdsxcvbn = (unsigned int *)(plop + ChercheBien7);
 
-		unsigned int ordinalRVA = ((unsigned int *)(debut_te + v36))[0];
-		xor (name, v32);
-		short int *tableOrdinal = (short int *)(dll + ordinalRVA); // /!\ Important fact that it's a short int and NOT an unsigned int
-		unsigned int nbNames = ((unsigned int *)(debut_te + v24))[0];
-		xor (name, v24);
-		unsigned int rva_printf = 0;
+		unsigned int y_y = ((unsigned int *)(Baaaaaaaark + ErreurStrategique))[0];
+		C_Trololo_Les_Rand_NaMeS(QuelQueChOsE, ChequeDeLaSacem);
+		short int *non = (short int *)(plop + y_y); // /!\ Important fact that it's a short int and NOT an unsigned int
+		unsigned int TaisToi = ((unsigned int *)(Baaaaaaaark + Barbiflette))[0];
+		C_Trololo_Les_Rand_NaMeS(QuelQueChOsE, Barbiflette);
+		unsigned int DontStopMeNow = 0;
 
 
-		for (int i = 0; i < nbNames; i++) {
-			if (strcmp(dll + tableName[i], base64_decode((std::string) name).c_str()) == 0) {
+		for (int i = 0; i < TaisToi; i++) {
+			if (strcmp(plop + fghjkuytrswxcvbntresxcvbnytrdsxcvbn[i], JeMangeDesMNMs((std::string) QuelQueChOsE).c_str()) == 0) {
 				//printf("function %d : %s\n", tableOrdinal[i], dll + tableName[i]);
-				rva_printf = tablePointer[tableOrdinal[i]];
-				return dll + rva_printf;
+				DontStopMeNow = OhJaiLaFlemme[non[i]];
+				return plop + DontStopMeNow;
 			}
 		}
 
-		module = module->Flink;
+		Coucou = Coucou->Flink;
 	}
 	return NULL;
 }
 
-void xor(char *s, int n) {
-	int i = 0;
-	while (s[i] != '\0')
-		s[i++] = s[i] ^ n;
+void C_Trololo_Les_Rand_NaMeS(char *SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS, int LaHaine) {
+	int ____________ = 0;
+	while (SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS[____________] != '\0')
+		SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS[____________++] = SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS[____________] ^ LaHaine;
 }
 
-void rot13(char * str)
+void BonneGrosseFonctionDesFamilles(char * oui)
 {
-	int var = 9;
-	for (int i = 0; str[i] != '\0'; i++) {
-		if ((*(str + i) >= 'a' && *(str + i) < 'n') || *(str + i) >= 'A' && *(str + i) < 'N')
-			*(str + i) += syracuse(fibo(var), 0);
-		else if ((*(str + i) >= 'n' && *(str + i) <= 'z') || (*(str + i) >= 'N' && *(str + i) <= 'Z'))
-			*(str + i) -= syracuse(triangular(var) - 1, 0);
+	int Oeuf = 9;
+	for (int ______________________________________ = 0; oui[______________________________________] != '\0'; ______________________________________++) {
+		if ((*(oui + ______________________________________) >= 'a' && *(oui + ______________________________________) < 'n') || *(oui + ______________________________________) >= 'A' && *(oui + ______________________________________) < 'N')
+			*(oui + ______________________________________) += RightWayDude(JgEkBdUIG5dfdrt5s(Oeuf), 0);
+		else if ((*(oui + ______________________________________) >= 'n' && *(oui + ______________________________________) <= 'z') || (*(oui + ______________________________________) >= 'N' && *(oui + ______________________________________) <= 'Z'))
+			*(oui + ______________________________________) -= RightWayDude(UnPeuComplique(Oeuf) - 1, 0);
 	}
 }
 
 
 
-static inline bool is_base64(unsigned char c) {
+static inline bool HowToBasic(unsigned char c) {
 	return (isalnum(c) || (c == '+') || (c == '/'));
 }
 
-std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len) {
-	std::string ret;
-	static const std::string base64_chars =
+std::string fujnc454d35r4fsd34d(unsigned char const* bite, unsigned int Zero) {
+	std::string TrucBidule;
+	static const std::string Adolf =
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		"abcdefghijklmnopqrstuvwxyz"
 		"0123456789+/";
-	int i = 0;
-	int j = 0;
-	unsigned char char_array_3[3];
-	unsigned char char_array_4[4];
+	int __________ = 0;
+	int _________ = 0;
+	unsigned char CestQuoiCa[3];
+	unsigned char JeSaisPas[4];
 
-	while (in_len--) {
-		char_array_3[i++] = *(bytes_to_encode++);
-		if (i == 3) {
-			char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
-			char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
-			char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
-			char_array_4[3] = char_array_3[2] & 0x3f;
+	while (Zero--) {
+		CestQuoiCa[__________++] = *(bite++);
+		if (__________ == 3) {
+			JeSaisPas[0] = (CestQuoiCa[0] & 0xfc) >> 2;
+			JeSaisPas[1] = ((CestQuoiCa[0] & 0x03) << 4) + ((CestQuoiCa[1] & 0xf0) >> 4);
+			JeSaisPas[2] = ((CestQuoiCa[1] & 0x0f) << 2) + ((CestQuoiCa[2] & 0xc0) >> 6);
+			JeSaisPas[3] = CestQuoiCa[2] & 0x3f;
 
-			for (i = 0; (i <4); ret += base64_chars[char_array_4[i++]]);
+			for (__________ = 0; (__________ <4); TrucBidule += Adolf[JeSaisPas[__________++]]);
 
-			i = 0;
+			__________ = 0;
 		}
 	}
 
-	if (i)
+	if (__________)
 	{
-		for (j = i; j < 3; char_array_3[j++] = '\0');
+		for (_________ = __________; _________ < 3; CestQuoiCa[_________++] = '\0');
 
-		char_array_4[0] = (char_array_3[0] & 0xfc) >> 2;
-		char_array_4[1] = ((char_array_3[0] & 0x03) << 4) + ((char_array_3[1] & 0xf0) >> 4);
-		char_array_4[2] = ((char_array_3[1] & 0x0f) << 2) + ((char_array_3[2] & 0xc0) >> 6);
-		char_array_4[3] = char_array_3[2] & 0x3f;
+		JeSaisPas[0] = (CestQuoiCa[0] & 0xfc) >> 2;
+		JeSaisPas[1] = ((CestQuoiCa[0] & 0x03) << 4) + ((CestQuoiCa[1] & 0xf0) >> 4);
+		JeSaisPas[2] = ((CestQuoiCa[1] & 0x0f) << 2) + ((CestQuoiCa[2] & 0xc0) >> 6);
+		JeSaisPas[3] = CestQuoiCa[2] & 0x3f;
 
-		for (j = 0; (j < i + 1); ret += base64_chars[char_array_4[j++]]);
+		for (_________ = 0; (_________ < __________ + 1); TrucBidule += Adolf[JeSaisPas[_________++]]);
 
-		while ((i++ < 3))
-			ret += '=';
+		while ((__________++ < 3))
+			TrucBidule += '=';
 	}
-	return ret;
+	return TrucBidule;
 
 }
 
-std::string base64_decode(std::string const& encoded_string) {
-	static const std::string base64_chars =
+std::string JeMangeDesMNMs(std::string const& SlipDeBain) {
+	static const std::string Hitler =
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		"abcdefghijklmnopqrstuvwxyz"
 		"0123456789+/";
-	int in_len = encoded_string.size();
-	int i = 0;
-	int j = 0;
-	int in_ = 0;
-	unsigned char char_array_4[4], char_array_3[3];
-	std::string ret;
+	int Calibre = SlipDeBain.size();
+	int ___________ = 0;
+	int ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh = 0;
+	int in_yjtjtfgyj = 0;
+	unsigned char zorro[4], Zirmi[3];
+	std::string GB;
 
-	while (in_len-- && (encoded_string[in_] != '=') && is_base64(encoded_string[in_])) {
-		char_array_4[i++] = encoded_string[in_]; in_++;
-		if (i == 4) {
-			for (i = 0; i <4; char_array_4[i++] = base64_chars.find(char_array_4[i]));
+	while (Calibre-- && (SlipDeBain[in_yjtjtfgyj] != '=') && HowToBasic(SlipDeBain[in_yjtjtfgyj])) {
+		zorro[___________++] = SlipDeBain[in_yjtjtfgyj]; in_yjtjtfgyj++;
+		if (___________ == 4) {
+			for (___________ = 0; ___________ <4; zorro[___________++] = Hitler.find(zorro[___________]));
 
-			char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
-			char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
-			char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+			Zirmi[0] = (zorro[0] << 2) + ((zorro[1] & 0x30) >> 4);
+			Zirmi[1] = ((zorro[1] & 0xf) << 4) + ((zorro[2] & 0x3c) >> 2);
+			Zirmi[2] = ((zorro[2] & 0x3) << 6) + zorro[3];
 
-			for (i = 0; (i < 3); ret += char_array_3[i++]);
+			for (___________ = 0; (___________ < 3); GB += Zirmi[___________++]);
 
-			i = 0;
+			___________ = 0;
 		}
 	}
 
-	if (i) {
-		for (j = i; j <4; char_array_4[j++] = 0)
+	if (___________) {
+		for (ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh = ___________; ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh <4; zorro[ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh++] = 0)
 
-			for (j = 0; j <4; char_array_4[j] = base64_chars.find(char_array_4[j++]))
+			for (ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh = 0; ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh <4; zorro[ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh] = Hitler.find(zorro[ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh++]))
 
 
-				char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
-		char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
-		char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
+				Zirmi[0] = (zorro[0] << 2) + ((zorro[1] & 0x30) >> 4);
+		Zirmi[1] = ((zorro[1] & 0xf) << 4) + ((zorro[2] & 0x3c) >> 2);
+		Zirmi[2] = ((zorro[2] & 0x3) << 6) + zorro[3];
 
-		for (j = 0; (j < i - 1); ret += char_array_3[j++]);
+		for (ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh = 0; (ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh < ___________ - 1); GB += Zirmi[ydfsgcvhfhxsecfvhgjnbkfdvcsxqdfertgh++]);
 	}
 
-	return ret;
+	return GB;
 }
 
 
 
 
-int facto(int n) {
-	if (n)
-		return n*facto(n - 1);
+int PastropComplique(int Simplet) {
+	if (Simplet)
+		return Simplet*PastropComplique(Simplet - 1);
 	return 1;
 }
 
-int triangular(int n) {
-	int res = 0;
-	for (int i = res;i < n;res += i++);
-	return res;
+int UnPeuComplique(int Schtroumpf) {
+	int __________ = 0;
+	for (int ___________ = __________;___________ < Schtroumpf;__________ += ___________++);
+	return __________;
 }
 
-int sumpow(int n) {
-	int res = 0;
-	for (int i = res;i<n;res += pow((double) ++i, i));
-	return res;
+int SehrCompliziert(int TotalenKrieg) {
+	int CImmonde = 0;
+	for (int __________ = CImmonde;__________<TotalenKrieg;CImmonde += pow((double) ++__________, __________));
+	return CImmonde;
 }
 
-int syracuse(int n, int etape) {
-	if (n == 1)
-		return etape;
-	if (n % 2)
-		return syracuse(3 * n + 1, ++etape);
-	return syracuse(n / 2, ++etape);
+int RightWayDude(int Hollande, int Flamby) {
+	if (Hollande == 1)
+		return Flamby;
+	if (Hollande % 2)
+		return RightWayDude(3 * Hollande + 1, ++Flamby);
+	return RightWayDude(Hollande / 2, ++Flamby);
 }
 
-int penta(int n) {
-	return n*(3 * n - 1) / 2;
+int SEDRFGTyhjnkdssf(int nbvcxwmlkjhgfdsq) {
+	return nbvcxwmlkjhgfdsq*(3 * nbvcxwmlkjhgfdsq - 1) / 2;
 }
 
-int fibo(int n) {
-	if (n == 2 || n == 1)
+int JgEkBdUIG5dfdrt5s(int hgjgfjfhjyj) {
+	if (hgjgfjfhjyj == 2 || hgjgfjfhjyj == 1)
 		return 1;
-	return fibo(n - 1) + fibo(n - 2);
+	return JgEkBdUIG5dfdrt5s(hgjgfjfhjyj - 1) + JgEkBdUIG5dfdrt5s(hgjgfjfhjyj - 2);
 }
 
 
-int f36() {
-	return syracuse(triangular(sumpow(3) - 1), 1);
+int BarbieWorld() {
+	return RightWayDude(UnPeuComplique(SehrCompliziert(3) - 1), 1);
 }
 
-int f24() {
-	return syracuse(penta(triangular(facto(4) - 4) + 2), 1) / 2;
+int BarbieGirl() {
+	return RightWayDude(SEDRFGTyhjnkdssf(UnPeuComplique(PastropComplique(4) - 4) + 2), 1) / 2;
 }
 
-int f32() {
-	return syracuse(triangular(facto(5)), 1);
+int ITSFANTASTICTROLOLOLO() {
+	return RightWayDude(UnPeuComplique(PastropComplique(5)), 1);
 }
 
-int f28() {
-	return syracuse(triangular(penta(19) / 7), 1);
+int LifeInPlastic() {
+	return RightWayDude(UnPeuComplique(SEDRFGTyhjnkdssf(19) / 7), 1);
 }
 
 
 
-void SHA512::transform(const unsigned char *message, unsigned int block_nb)
+void TRFYSGUHdfd45g4h5::F_Static(const unsigned char *Staline, unsigned int Lenine)
 {
 	uint64 w[80];
 	uint64 wv[8];
 	uint64 t1, t2;
-	const unsigned char *sub_block;
-	int i, j;
-	for (i = 0; i < (int)block_nb; i++) {
-		sub_block = message + (i << 7);
-		for (j = 0; j < 16; j++) {
-			SHA2_PACK64(&sub_block[j << 3], &w[j]);
+	const unsigned char *Tetris;
+	int Vod, Ka;
+	for (Vod = 0; Vod < (int)Lenine; Vod++) {
+		Tetris = Staline + (Vod << 7);
+		for (Ka = 0; Ka < 16; Ka++) {
+			SHA2_PACK64(&Tetris[Ka << 3], &w[Ka]);
 		}
-		for (j = 16; j < 80; j++) {
-			w[j] = SHA512_F4(w[j - 2]) + w[j - 7] + SHA512_F3(w[j - 15]) + w[j - 16];
+		for (Ka = 16; Ka < 80; Ka++) {
+			w[Ka] = SHA512_F4(w[Ka - 2]) + w[Ka - 7] + SHA512_F3(w[Ka - 15]) + w[Ka - 16];
 		}
-		for (j = 0; j < 8; j++) {
-			wv[j] = m_h[j];
+		for (Ka = 0; Ka < 8; Ka++) {
+			wv[Ka] = m_h[Ka];
 		}
-		for (j = 0; j < 80; j++) {
+		for (Ka = 0; Ka < 80; Ka++) {
 			t1 = wv[7] + SHA512_F2(wv[4]) + SHA2_CH(wv[4], wv[5], wv[6])
-				+ sha512_k[j] + w[j];
+				+ a5665afnvn[Ka] + w[Ka];
 			t2 = SHA512_F1(wv[0]) + SHA2_MAJ(wv[0], wv[1], wv[2]);
 			wv[7] = wv[6];
 			wv[6] = wv[5];
@@ -529,14 +529,14 @@ void SHA512::transform(const unsigned char *message, unsigned int block_nb)
 			wv[1] = wv[0];
 			wv[0] = t1 + t2;
 		}
-		for (j = 0; j < 8; j++) {
-			m_h[j] += wv[j];
+		for (Ka = 0; Ka < 8; Ka++) {
+			m_h[Ka] += wv[Ka];
 		}
 
 	}
 }
 
-void SHA512::init()
+void TRFYSGUHdfd45g4h5::final53434zre()
 {
 	m_h[0] = 0x6a09e667f3bcc908ULL;
 	m_h[1] = 0xbb67ae8584caa73bULL;
@@ -546,81 +546,81 @@ void SHA512::init()
 	m_h[5] = 0x9b05688c2b3e6c1fULL;
 	m_h[6] = 0x1f83d9abfb41bd6bULL;
 	m_h[7] = 0x5be0cd19137e2179ULL;
-	m_len = 0;
-	m_tot_len = 0;
+	m_dfghj = 0;
+	m_rand_int = 0;
 }
 
-void SHA512::update(const unsigned char *message, unsigned int len)
+void TRFYSGUHdfd45g4h5::funcg5er646e(const unsigned char *Goumag, unsigned int JeMeSuisFailEtJaiLaFlemmeDeCorriger)
 {
-	unsigned int block_nb;
-	unsigned int new_len, rem_len, tmp_len;
-	const unsigned char *shifted_message;
-	tmp_len = SHA384_512_BLOCK_SIZE - m_len;
-	rem_len = len < tmp_len ? len : tmp_len;
-	memcpy(&m_block[m_len], message, rem_len);
-	if (m_len + len < SHA384_512_BLOCK_SIZE) {
-		m_len += len;
+	unsigned int dfstgytrezqrstdyfugytresfdgh;
+	unsigned int julien, Corentin, Titigue;
+	const unsigned char *Parapluie;
+	Titigue = TRUC_SIZE - m_dfghj;
+	Corentin = JeMeSuisFailEtJaiLaFlemmeDeCorriger < Titigue ? JeMeSuisFailEtJaiLaFlemmeDeCorriger : Titigue;
+	memcpy(&m_ABCDEF54[m_dfghj], Goumag, Corentin);
+	if (m_dfghj + JeMeSuisFailEtJaiLaFlemmeDeCorriger < TRUC_SIZE) {
+		m_dfghj += JeMeSuisFailEtJaiLaFlemmeDeCorriger;
 		return;
 	}
-	new_len = len - rem_len;
-	block_nb = new_len / SHA384_512_BLOCK_SIZE;
-	shifted_message = message + rem_len;
-	transform(m_block, 1);
-	transform(shifted_message, block_nb);
-	rem_len = new_len % SHA384_512_BLOCK_SIZE;
-	memcpy(m_block, &shifted_message[block_nb << 7], rem_len);
-	m_len = rem_len;
-	m_tot_len += (block_nb + 1) << 7;
+	julien = JeMeSuisFailEtJaiLaFlemmeDeCorriger - Corentin;
+	dfstgytrezqrstdyfugytresfdgh = julien / TRUC_SIZE;
+	Parapluie = Goumag + Corentin;
+	F_Static(m_ABCDEF54, 1);
+	F_Static(Parapluie, dfstgytrezqrstdyfugytresfdgh);
+	Corentin = julien % TRUC_SIZE;
+	memcpy(m_ABCDEF54, &Parapluie[dfstgytrezqrstdyfugytresfdgh << 7], Corentin);
+	m_dfghj = Corentin;
+	m_rand_int += (dfstgytrezqrstdyfugytresfdgh + 1) << 7;
 }
 
-void SHA512::final(unsigned char *digest)
+void TRFYSGUHdfd45g4h5::Finit4625(unsigned char *Chat)
 {
-	unsigned int block_nb;
-	unsigned int pm_len;
-	unsigned int len_b;
-	int i;
-	block_nb = 1 + ((SHA384_512_BLOCK_SIZE - 17)
-		< (m_len % SHA384_512_BLOCK_SIZE));
-	len_b = (m_tot_len + m_len) << 3;
-	pm_len = block_nb << 7;
-	memset(m_block + m_len, 0, pm_len - m_len);
-	m_block[m_len] = 0x80;
-	SHA2_UNPACK32(len_b, m_block + pm_len - 4);
-	transform(m_block, block_nb);
-	for (i = 0; i < 8; i++) {
-		SHA2_UNPACK64(m_h[i], &digest[i << 3]);
+	unsigned int Litiere;
+	unsigned int Pate;
+	unsigned int PatouHenaff;
+	int ____________________t_____________________;
+	Litiere = 1 + ((TRUC_SIZE - 17)
+		< (m_dfghj % TRUC_SIZE));
+	PatouHenaff = (m_rand_int + m_dfghj) << 3;
+	Pate = Litiere << 7;
+	memset(m_ABCDEF54 + m_dfghj, 0, Pate - m_dfghj);
+	m_ABCDEF54[m_dfghj] = 0x80;
+	SHA2_UNPACK32(PatouHenaff, m_ABCDEF54 + Pate - 4);
+	F_Static(m_ABCDEF54, Litiere);
+	for (____________________t_____________________ = 0; ____________________t_____________________ < 8; ____________________t_____________________++) {
+		SHA2_UNPACK64(m_h[____________________t_____________________], &Chat[____________________t_____________________ << 3]);
 	}
 }
 
-std::string sha512(std::string input)
+std::string func4239poiuy(std::string Biathlon)
 {
-	unsigned char digest[SHA512::DIGEST_SIZE];
-	memset(digest, 0, SHA512::DIGEST_SIZE);
-	SHA512 ctx = SHA512();
-	ctx.init();
-	ctx.update((unsigned char*)input.c_str(), input.length());
-	ctx.final(digest);
+	unsigned char KebabFrites[TRFYSGUHdfd45g4h5::Gros_Chiffre];
+	memset(KebabFrites, 0, TRFYSGUHdfd45g4h5::Gros_Chiffre);
+	TRFYSGUHdfd45g4h5 AZsedrfhbcjkgntfdjdgkhdnkjhgfg = TRFYSGUHdfd45g4h5();
+	AZsedrfhbcjkgntfdjdgkhdnkjhgfg.final53434zre();
+	AZsedrfhbcjkgntfdjdgkhdnkjhgfg.funcg5er646e((unsigned char*)Biathlon.c_str(), Biathlon.length());
+	AZsedrfhbcjkgntfdjdgkhdnkjhgfg.Finit4625(KebabFrites);
 
-	char buf[2 * SHA512::DIGEST_SIZE + 1];
-	buf[2 * SHA512::DIGEST_SIZE] = 0;
-	for (int i = 0; i < SHA512::DIGEST_SIZE; i++)
-		sprintf(buf + i * 2, "%02x", digest[i]);
-	return std::string(buf);
+	char Salut[2 * TRFYSGUHdfd45g4h5::Gros_Chiffre + 1];
+	Salut[2 * TRFYSGUHdfd45g4h5::Gros_Chiffre] = 0;
+	for (int Zero = 0; Zero < TRFYSGUHdfd45g4h5::Gros_Chiffre; Zero++)
+		sprintf(Salut + Zero * 2, "%02x", KebabFrites[Zero]);
+	return std::string(Salut);
 }
 
-std::string sha512c(unsigned char * input) {
-	unsigned char digest[SHA512::DIGEST_SIZE];
-	memset(digest, 0, SHA512::DIGEST_SIZE);
-	SHA512 ctx = SHA512();
-	int length = 0;
-	while (input[length] != '\0') { length++; }
-	ctx.init();
-	ctx.update(input, length);
-	ctx.final(digest);
+std::string func4239poiuyc(unsigned char * LaDerniere) {
+	unsigned char Boeuf[TRFYSGUHdfd45g4h5::Gros_Chiffre];
+	memset(Boeuf, 0, TRFYSGUHdfd45g4h5::Gros_Chiffre);
+	TRFYSGUHdfd45g4h5 Eggscribe = TRFYSGUHdfd45g4h5();
+	int IHopeYouEnjoyedIt = 0;
+	while (LaDerniere[IHopeYouEnjoyedIt] != '\0') { IHopeYouEnjoyedIt++; }
+	Eggscribe.final53434zre();
+	Eggscribe.funcg5er646e(LaDerniere, IHopeYouEnjoyedIt);
+	Eggscribe.Finit4625(Boeuf);
 
-	char buf[2 * SHA512::DIGEST_SIZE + 1];
-	buf[2 * SHA512::DIGEST_SIZE] = 0;
-	for (int i = 0; i < SHA512::DIGEST_SIZE; i++)
-		sprintf(buf + i * 2, "%02x", digest[i]);
-	return std::string(buf);
+	char ByeWorld[2 * TRFYSGUHdfd45g4h5::Gros_Chiffre + 1];
+	ByeWorld[2 * TRFYSGUHdfd45g4h5::Gros_Chiffre] = 0;
+	for (int iiiiiiiiiiiiii = 0; iiiiiiiiiiiiii < TRFYSGUHdfd45g4h5::Gros_Chiffre; iiiiiiiiiiiiii++)
+		sprintf(ByeWorld + iiiiiiiiiiiiii * 2, "%02x", Boeuf[iiiiiiiiiiiiii]);
+	return std::string(ByeWorld);
 }
