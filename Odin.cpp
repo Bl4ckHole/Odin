@@ -125,7 +125,7 @@ std::string base64_decode(std::string const&);
 int facto(int);
 int triangular(int);
 int sumpow(int);
-int syracuse(int,int);
+int syracuse(int, int);
 int penta(int);
 int fibo(int);
 
@@ -139,12 +139,12 @@ string getHash();
 
 char n1[] = { 0x5f, 0x74, 0x76, 0x4c, 0x5e, 0x52, 0x6e, 0x51, 0x0 };
 char Hello[] = { 'F', 'T', 'I', 'f', 'o', 'T', '8', 'f', 'V', 'U', 'q', 'i', 'p', 'z', 'k', 'x', 'V', 'P', 'R', 'X', 0x0 };
-const string signature="";
+const string signature = "";
 
 string super_string = "I know, debugging some obfuscated code is funny... Haha.";
 
 #include <tchar.h>
-#include <Psapi.h>
+#include <psapi.h>
 
 unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
 {
@@ -159,35 +159,33 @@ unsigned char* GetBaseAddressByName(DWORD processId, TCHAR *processName)
 		HMODULE hMod;
 		DWORD cbNeeded;
 
-		if (EnumProcessModulesEx(hProcess, &hMod, sizeof(hMod),
-			&cbNeeded, LIST_MODULES_32BIT | LIST_MODULES_64BIT))
+		if (EnumProcessModules(hProcess, &hMod, sizeof(hMod),
+			&cbNeeded))
 		{
 			GetModuleBaseName(hProcess, hMod, szProcessName,
 				sizeof(szProcessName) / sizeof(TCHAR));
 			if (!_tcsicmp(processName, szProcessName)) {
-				CloseHandle(hProcess);
 				//printf("%p\n", hMod);
-				return (unsigned char *) hMod;
+				return (unsigned char *)hMod;
 			}
 		}
 	}
-
-	CloseHandle(hProcess);
 	return NULL;
 }
 
-#define NHASH 400
+#define NHASH 950
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	char *peb;
-	_asm{
+	_asm {
 		mov eax, fs:[30h]
-		mov peb, eax
+			mov peb, eax
 	}
 
 	string endHash;
 	endHash = getHash();
+
 
 
 	//printf("SHA512 of exe : %s \n", sha512("Odin.exe").c_str());
@@ -197,7 +195,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	endHash = getHash();
-	if (!checkHash(endHash)){
+	if (!checkHash(endHash)) {
 		return 1;
 	}
 
@@ -210,7 +208,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		return 1;
 	}
 
-	type_printf f = (type_printf)extractFunc(n1,pld);
+	type_printf f = (type_printf)extractFunc(n1, pld);
 	endHash = getHash();
 	if (!checkHash(endHash)) {
 		return 1;
@@ -228,10 +226,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 }
 
-bool checkHash(string hash){
-	string originalHash = "25160b524cf865ec15782c2e3239c55f626b814bb08548e3264a8d1a40730bc3d4dae0be95dbd9275d8bee82242e38c4ec76c65b1ad5ecd6d8b58be182c8ec3f";
+bool checkHash(string hash) {
+	string originalHash = "9c31b971a9d5970caa612fa2a7e793ea879323538247159f23da9318e9d14805856dc2a399d739080c53367515d337eda25cf0d90b376ace5ffdfde0d2afbd71";
 	//printf("%s\n%s\n", originalHash.c_str(), hash.c_str());
-	return !strcmp(hash.c_str(),originalHash.c_str());
+	return !strcmp(hash.c_str(), originalHash.c_str());
 }
 
 
@@ -264,11 +262,11 @@ string getHash() {
 		codeBlock[i] = processPointer[i];
 		candidate >>= 8;
 		candidate += (codeBlock[i] & 255) << 8;
-		if (candidate == mask){
+		if (candidate == mask) {
 			codeBlock[i] = 42;
 			codeBlock[i - 1] = 42;
 		}
-		else if (candidate == mask - 1){
+		else if (candidate == mask - 1) {
 			codeBlock[i] = 43;
 			codeBlock[i - 1] = 43;
 		}
@@ -276,55 +274,55 @@ string getHash() {
 	codeBlock[NHASH] = '\0';
 	/*printf("%p\n", processPointer);
 	for (int i = 0; i < NHASH; i++){
-		printf("%d ", codeBlock[i]);
+	printf("%d ", codeBlock[i]);
 	}*/
 	return sha512c(codeBlock);
 
 }
 
-void *extractFunc(char *name, PPEB_LDR_DATA pld){
+void *extractFunc(char *name, PPEB_LDR_DATA pld) {
 	PLIST_ENTRY module0 = &(pld->InMemoryOrderModuleList);
 	PLIST_ENTRY module = module0->Flink;
 	module = module->Flink;
 
-	
+
 	int v36 = f36();
-	xor(name, v36);
+	xor (name, v36);
 	int v28 = f28();
 	int v24 = f24();
-	xor(name, v24);
+	xor (name, v24);
 	int v32 = f32();
 
-	while (module != module0){
+	while (module != module0) {
 		char *pointer = (char*)module - 2 * sizeof(PVOID);
 		PLDR_DATA_TABLE_ENTRY pdte = (PLDR_DATA_TABLE_ENTRY)pointer;
 		//printf("%S\n", pdte->FullDllName.Buffer);
 		char *dll = (char*)pdte->DllBase;
 
-		unsigned int pe = ((unsigned int*)(dll + v24+v36))[0];
-		unsigned int te = ((unsigned int*)(dll + pe + 2*(v28+v32)))[0];
+		unsigned int pe = ((unsigned int*)(dll + v24 + v36))[0];
+		unsigned int te = ((unsigned int*)(dll + pe + 2 * (v28 + v32)))[0];
 		char * debut_te = dll + te;
 		unsigned int tableFonction = ((unsigned int*)(debut_te + v28))[0];
-		xor(name, v28);
+		xor (name, v28);
 		unsigned int * tablePointer = (unsigned int*)(dll + tableFonction);
 
 		unsigned int nameRVA = ((unsigned int *)(debut_te + v32))[0];
-		xor(name, v36);
+		xor (name, v36);
 		unsigned int * tableName = (unsigned int *)(dll + nameRVA);
 
 		unsigned int ordinalRVA = ((unsigned int *)(debut_te + v36))[0];
-		xor(name, v32);
+		xor (name, v32);
 		short int *tableOrdinal = (short int *)(dll + ordinalRVA); // /!\ Important fact that it's a short int and NOT an unsigned int
 		unsigned int nbNames = ((unsigned int *)(debut_te + v24))[0];
-		xor(name, v24); 
+		xor (name, v24);
 		unsigned int rva_printf = 0;
 
-		
-		for (int i = 0; i < nbNames; i++){
-			if (strcmp(dll + tableName[i], base64_decode((std::string) name).c_str()) == 0){
+
+		for (int i = 0; i < nbNames; i++) {
+			if (strcmp(dll + tableName[i], base64_decode((std::string) name).c_str()) == 0) {
 				//printf("function %d : %s\n", tableOrdinal[i], dll + tableName[i]);
 				rva_printf = tablePointer[tableOrdinal[i]];
-				return dll+rva_printf;
+				return dll + rva_printf;
 			}
 		}
 
@@ -333,7 +331,7 @@ void *extractFunc(char *name, PPEB_LDR_DATA pld){
 	return NULL;
 }
 
-void xor(char *s, int n){
+void xor(char *s, int n) {
 	int i = 0;
 	while (s[i] != '\0')
 		s[i++] = s[i] ^ n;
@@ -341,12 +339,12 @@ void xor(char *s, int n){
 
 void rot13(char * str)
 {
-	int var=9;
+	int var = 9;
 	for (int i = 0; str[i] != '\0'; i++) {
 		if ((*(str + i) >= 'a' && *(str + i) < 'n') || *(str + i) >= 'A' && *(str + i) < 'N')
-			*(str + i) += syracuse(fibo(var),0);
+			*(str + i) += syracuse(fibo(var), 0);
 		else if ((*(str + i) >= 'n' && *(str + i) <= 'z') || (*(str + i) >= 'N' && *(str + i) <= 'Z'))
-			*(str + i) -= syracuse(triangular(var)-1,0);
+			*(str + i) -= syracuse(triangular(var) - 1, 0);
 	}
 }
 
@@ -376,7 +374,7 @@ std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_
 			char_array_4[3] = char_array_3[2] & 0x3f;
 
 			for (i = 0; (i <4); ret += base64_chars[char_array_4[i++]]);
-		
+
 			i = 0;
 		}
 	}
@@ -421,7 +419,7 @@ std::string base64_decode(std::string const& encoded_string) {
 			char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
 			for (i = 0; (i < 3); ret += char_array_3[i++]);
-				
+
 			i = 0;
 		}
 	}
@@ -429,14 +427,14 @@ std::string base64_decode(std::string const& encoded_string) {
 	if (i) {
 		for (j = i; j <4; char_array_4[j++] = 0)
 
-		for (j = 0; j <4; char_array_4[j] = base64_chars.find(char_array_4[j++]))
-			
+			for (j = 0; j <4; char_array_4[j] = base64_chars.find(char_array_4[j++]))
 
-		char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
+
+				char_array_3[0] = (char_array_4[0] << 2) + ((char_array_4[1] & 0x30) >> 4);
 		char_array_3[1] = ((char_array_4[1] & 0xf) << 4) + ((char_array_4[2] & 0x3c) >> 2);
 		char_array_3[2] = ((char_array_4[2] & 0x3) << 6) + char_array_4[3];
 
-		for (j = 0; (j < i - 1); ret += char_array_3[j++]) ;
+		for (j = 0; (j < i - 1); ret += char_array_3[j++]);
 	}
 
 	return ret;
@@ -447,55 +445,55 @@ std::string base64_decode(std::string const& encoded_string) {
 
 int facto(int n) {
 	if (n)
-		return n*facto(n-1);
+		return n*facto(n - 1);
 	return 1;
 }
 
 int triangular(int n) {
-	int res=0;
+	int res = 0;
 	for (int i = res;i < n;res += i++);
 	return res;
 }
 
 int sumpow(int n) {
-	int res=0;
-	for(int i=res;i<n;res+=pow(++i,i));
+	int res = 0;
+	for (int i = res;i<n;res += pow((double) ++i, i));
 	return res;
 }
 
-int syracuse(int n, int etape){
-	if (n == 1) 
+int syracuse(int n, int etape) {
+	if (n == 1)
 		return etape;
-	if (n%2)
-		return syracuse(3*n+1,++etape);
-	return syracuse(n/2,++etape);
+	if (n % 2)
+		return syracuse(3 * n + 1, ++etape);
+	return syracuse(n / 2, ++etape);
 }
 
 int penta(int n) {
-	return n*(3*n-1)/2;
+	return n*(3 * n - 1) / 2;
 }
 
 int fibo(int n) {
-	if (n==2 || n==1)
+	if (n == 2 || n == 1)
 		return 1;
-	return fibo(n-1)+fibo(n-2);
+	return fibo(n - 1) + fibo(n - 2);
 }
 
 
-int f36(){
-	return syracuse(triangular(sumpow(3)-1),1);
+int f36() {
+	return syracuse(triangular(sumpow(3) - 1), 1);
 }
 
-int f24(){
-	return syracuse(penta(triangular(facto(4)-4)+2), 1) / 2;
+int f24() {
+	return syracuse(penta(triangular(facto(4) - 4) + 2), 1) / 2;
 }
 
-int f32(){
-	return syracuse(triangular(facto(5)),1);
+int f32() {
+	return syracuse(triangular(facto(5)), 1);
 }
 
-int f28(){
-	return syracuse(triangular(penta(19) / 7),1);
+int f28() {
+	return syracuse(triangular(penta(19) / 7), 1);
 }
 
 
@@ -610,12 +608,12 @@ std::string sha512(std::string input)
 	return std::string(buf);
 }
 
-std::string sha512c(unsigned char * input){
+std::string sha512c(unsigned char * input) {
 	unsigned char digest[SHA512::DIGEST_SIZE];
 	memset(digest, 0, SHA512::DIGEST_SIZE);
 	SHA512 ctx = SHA512();
 	int length = 0;
-	while (input[length] != '\0'){ length++; }
+	while (input[length] != '\0') { length++; }
 	ctx.init();
 	ctx.update(input, length);
 	ctx.final(digest);
